@@ -1,0 +1,16 @@
+D:\WebAPI\RecruitmentWebApi\Recruitment.Persistence\bin\Debug\netstandard2.0\Recruitment.Persistence.deps.json
+D:\WebAPI\RecruitmentWebApi\Recruitment.Persistence\bin\Debug\netstandard2.0\Recruitment.Persistence.dll
+D:\WebAPI\RecruitmentWebApi\Recruitment.Persistence\bin\Debug\netstandard2.0\Recruitment.Persistence.pdb
+D:\WebAPI\RecruitmentWebApi\Recruitment.Persistence\bin\Debug\netstandard2.0\Recruitment.Application.dll
+D:\WebAPI\RecruitmentWebApi\Recruitment.Persistence\bin\Debug\netstandard2.0\Recruitment.Domain.dll
+D:\WebAPI\RecruitmentWebApi\Recruitment.Persistence\bin\Debug\netstandard2.0\Microsoft.Extensions.Logging.Abstractions.dll
+D:\WebAPI\RecruitmentWebApi\Recruitment.Persistence\bin\Debug\netstandard2.0\Recruitment.Application.pdb
+D:\WebAPI\RecruitmentWebApi\Recruitment.Persistence\bin\Debug\netstandard2.0\Recruitment.Domain.pdb
+D:\WebAPI\RecruitmentWebApi\Recruitment.Persistence\bin\Debug\netstandard2.0\Microsoft.Extensions.Logging.Abstractions.xml
+D:\WebAPI\RecruitmentWebApi\Recruitment.Persistence\obj\Debug\netstandard2.0\Recruitment.Persistence.csprojAssemblyReference.cache
+D:\WebAPI\RecruitmentWebApi\Recruitment.Persistence\obj\Debug\netstandard2.0\Recruitment.Persistence.csproj.CoreCompileInputs.cache
+D:\WebAPI\RecruitmentWebApi\Recruitment.Persistence\obj\Debug\netstandard2.0\Recruitment.Persistence.AssemblyInfoInputs.cache
+D:\WebAPI\RecruitmentWebApi\Recruitment.Persistence\obj\Debug\netstandard2.0\Recruitment.Persistence.AssemblyInfo.cs
+D:\WebAPI\RecruitmentWebApi\Recruitment.Persistence\obj\Debug\netstandard2.0\Recruitment.Persistence.csproj.CopyComplete
+D:\WebAPI\RecruitmentWebApi\Recruitment.Persistence\obj\Debug\netstandard2.0\Recruitment.Persistence.dll
+D:\WebAPI\RecruitmentWebApi\Recruitment.Persistence\obj\Debug\netstandard2.0\Recruitment.Persistence.pdb

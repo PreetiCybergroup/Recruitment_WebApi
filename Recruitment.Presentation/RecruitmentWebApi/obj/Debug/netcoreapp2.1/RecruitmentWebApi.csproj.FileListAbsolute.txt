@@ -1,0 +1,14 @@
+D:\WebAPI\RecruitmentWebApi\RecruitmentWebApi\bin\Debug\netcoreapp2.1\RecruitmentWebApi.deps.json
+D:\WebAPI\RecruitmentWebApi\RecruitmentWebApi\bin\Debug\netcoreapp2.1\RecruitmentWebApi.runtimeconfig.json
+D:\WebAPI\RecruitmentWebApi\RecruitmentWebApi\bin\Debug\netcoreapp2.1\RecruitmentWebApi.runtimeconfig.dev.json
+D:\WebAPI\RecruitmentWebApi\RecruitmentWebApi\bin\Debug\netcoreapp2.1\RecruitmentWebApi.dll
+D:\WebAPI\RecruitmentWebApi\RecruitmentWebApi\bin\Debug\netcoreapp2.1\RecruitmentWebApi.pdb
+D:\WebAPI\RecruitmentWebApi\RecruitmentWebApi\obj\Debug\netcoreapp2.1\RecruitmentWebApi.csprojAssemblyReference.cache
+D:\WebAPI\RecruitmentWebApi\RecruitmentWebApi\obj\Debug\netcoreapp2.1\RecruitmentWebApi.csproj.CoreCompileInputs.cache
+D:\WebAPI\RecruitmentWebApi\RecruitmentWebApi\obj\Debug\netcoreapp2.1\RecruitmentWebApi.RazorAssemblyInfo.cache
+D:\WebAPI\RecruitmentWebApi\RecruitmentWebApi\obj\Debug\netcoreapp2.1\RecruitmentWebApi.RazorAssemblyInfo.cs
+D:\WebAPI\RecruitmentWebApi\RecruitmentWebApi\obj\Debug\netcoreapp2.1\RecruitmentWebApi.AssemblyInfoInputs.cache
+D:\WebAPI\RecruitmentWebApi\RecruitmentWebApi\obj\Debug\netcoreapp2.1\RecruitmentWebApi.AssemblyInfo.cs
+D:\WebAPI\RecruitmentWebApi\RecruitmentWebApi\obj\Debug\netcoreapp2.1\RecruitmentWebApi.RazorTargetAssemblyInfo.cache
+D:\WebAPI\RecruitmentWebApi\RecruitmentWebApi\obj\Debug\netcoreapp2.1\RecruitmentWebApi.dll
+D:\WebAPI\RecruitmentWebApi\RecruitmentWebApi\obj\Debug\netcoreapp2.1\RecruitmentWebApi.pdb

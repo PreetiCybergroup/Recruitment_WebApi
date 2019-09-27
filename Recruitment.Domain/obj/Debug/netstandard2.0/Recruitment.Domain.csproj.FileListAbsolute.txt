@@ -1,0 +1,9 @@
+D:\WebAPI\RecruitmentWebApi\Recruitment.Domain\bin\Debug\netstandard2.0\Recruitment.Domain.deps.json
+D:\WebAPI\RecruitmentWebApi\Recruitment.Domain\bin\Debug\netstandard2.0\Recruitment.Domain.dll
+D:\WebAPI\RecruitmentWebApi\Recruitment.Domain\bin\Debug\netstandard2.0\Recruitment.Domain.pdb
+D:\WebAPI\RecruitmentWebApi\Recruitment.Domain\obj\Debug\netstandard2.0\Recruitment.Domain.csproj.CoreCompileInputs.cache
+D:\WebAPI\RecruitmentWebApi\Recruitment.Domain\obj\Debug\netstandard2.0\Recruitment.Domain.AssemblyInfoInputs.cache
+D:\WebAPI\RecruitmentWebApi\Recruitment.Domain\obj\Debug\netstandard2.0\Recruitment.Domain.AssemblyInfo.cs
+D:\WebAPI\RecruitmentWebApi\Recruitment.Domain\obj\Debug\netstandard2.0\Recruitment.Domain.dll
+D:\WebAPI\RecruitmentWebApi\Recruitment.Domain\obj\Debug\netstandard2.0\Recruitment.Domain.pdb
+D:\WebAPI\RecruitmentWebApi\Recruitment.Domain\obj\Debug\netstandard2.0\Recruitment.Domain.csprojAssemblyReference.cache
