@@ -9,6 +9,7 @@ namespace Recruitment.Application.RecruitmentProcess.Queries
     public class GetInterviewProcessDetailQuery : IRequest<InterviewProcessDetailModel>
     {
         public string Id { get; set; }
+    }
         public class GetInterviewProcessDetailQueryHandler : IRequestHandler<GetInterviewProcessDetailQuery, InterviewProcessDetailModel>
         {
             private readonly IInterviewProcessRepository _context;
@@ -29,7 +30,7 @@ namespace Recruitment.Application.RecruitmentProcess.Queries
         }
      }
 
-  }
+  
     
 
     

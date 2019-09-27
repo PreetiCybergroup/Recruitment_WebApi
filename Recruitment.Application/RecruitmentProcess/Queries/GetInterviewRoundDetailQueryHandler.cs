@@ -12,23 +12,23 @@ namespace Recruitment.Application.RecruitmentProcess.Queries
         public string Id { get; set; }
     }
 
-        public class GetInterviewRoundDetailQueryHandler : IRequestHandler<GetInterviewRoundDetailQuery, InterviewRoundDetailModel>
+    public class GetInterviewRoundDetailQueryHandler : IRequestHandler<GetInterviewRoundDetailQuery, InterviewRoundDetailModel>
+    {
+        private readonly IInterviewRoundRepository _context;
+
+        public GetInterviewRoundDetailQueryHandler(IInterviewRoundRepository context)
         {
-            private readonly IInterviewRoundRepository _context;
-
-            public GetInterviewRoundDetailQueryHandler(IInterviewRoundRepository context)
-            {
-                _context = context;
-            }
-
-           public async Task<InterviewRoundDetailModel> Handle(GetInterviewRoundDetailQuery request, CancellationToken cancellationToken)
-            {
-                var interviewround = new InterviewRound();
-                interviewround = await  _context.GetById(request.Id);
-                return InterviewRoundDetailModel.Create(interviewround);
-            }
+            _context = context;
         }
 
-        
-    
+        public async Task<InterviewRoundDetailModel> Handle(GetInterviewRoundDetailQuery request, CancellationToken cancellationToken)
+        {
+            var interviewround = new InterviewRound();
+            interviewround = await _context.GetById(request.Id);
+            return InterviewRoundDetailModel.Create(interviewround);
+        }
+    }
+
+
+
 }

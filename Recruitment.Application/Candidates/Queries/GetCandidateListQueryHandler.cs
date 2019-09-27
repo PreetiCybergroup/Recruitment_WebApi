@@ -16,15 +16,15 @@ namespace Recruitment.Application.Candidates.Queries
         private readonly IResumeRepository _context;
         private readonly IMapper _mapper;
 
-        public GetCandidateListQueryHandler(IResumeRepository context)
+        public GetCandidateListQueryHandler(IResumeRepository context, IMapper mapper)
         {
             _context = context;
-           // _mapper = mapper;
+            _mapper = mapper;
         }
 
         public async Task<CandidatesListViewModel> Handle(GetAllCandidateDetailQuery request, CancellationToken cancellationToken)
         {
-            var candidates = await _context.DbSet.Find(Builders<Candidate>.Filter.Empty).ToListAsync();
+            var candidates = await _context.GetAll();
             
             return new CandidatesListViewModel
             {

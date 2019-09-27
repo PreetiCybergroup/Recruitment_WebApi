@@ -6,7 +6,7 @@ using Recruitment.Domain.Entities;
 
 namespace Recruitment.Application.RecruitmentProcess.Queries
 {
-  public  class InterviewProcessListDetailModel:IRequest<InterviewProcess>
+  public  class InterviewProcessListDetailModel
     {
         public IEnumerable<InterviewProcess> interviewprocesslist;
     }

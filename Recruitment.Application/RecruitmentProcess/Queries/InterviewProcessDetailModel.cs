@@ -7,7 +7,6 @@ namespace Recruitment.Application.RecruitmentProcess.Queries
    public class InterviewProcessDetailModel
     {
         public string candidateId { get; set; }
-        public string InterviewRound { get; set; }
         public string Status { get; set; }
         public string Date { get; set; }
         

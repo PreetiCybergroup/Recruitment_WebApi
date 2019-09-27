@@ -97,7 +97,7 @@ namespace Recruitment.WebApi
             //services.AddAutoMapper(new Assembly[] { typeof(AutoMapperProfile).GetTypeInfo().Assembly });
             // Add MediatR
             //services.AddMediatR(typeof(GetCandidateDetailQueryHandler).GetType().Assembly);
-            //services.AddMediatR(typeof(IMapper).GetTypeInfo().Assembly);
+            services.AddAutoMapper(typeof(GetCandidateDetailQueryHandler).GetType().Assembly);
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestPerformanceBehaviour<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
             services.AddScoped<IDbContext, DbContext>();
@@ -118,11 +118,13 @@ namespace Recruitment.WebApi
 
             services.AddScoped(typeof(IRequest), typeof(GetCandidateListQueryHandler));
             services.AddMediatR(typeof(GetCandidateListQueryHandler).GetTypeInfo().Assembly);
-            
+
+            services.AddScoped(typeof(IRequest), typeof(GetInterviewProcessDetailQueryHandler));
+            services.AddMediatR(typeof(GetInterviewProcessDetailQueryHandler).GetTypeInfo().Assembly);
 
             //To get all documents related to InterviewProcess
-            services.AddScoped(typeof(IRequest), typeof(GetInterviewProcessListDetailQuery));
-            services.AddMediatR(typeof(GetInterviewProcessListDetailQuery).GetTypeInfo().Assembly);
+            services.AddScoped(typeof(IRequest), typeof(GetInterviewProcessListQueryHandler));
+            services.AddMediatR(typeof(GetInterviewProcessListQueryHandler).GetTypeInfo().Assembly);
 
             //To get all documents related to InterviewRound
             services.AddScoped(typeof(IRequest), typeof(GetInterviewRoundDetailQueryHandler));
@@ -131,11 +133,6 @@ namespace Recruitment.WebApi
             //To get all documents related to InterviewRound
             services.AddScoped(typeof(IRequest), typeof(GetInterviewRoundListDetailQueryHandler));
             services.AddMediatR(typeof(GetInterviewRoundListDetailQueryHandler).GetTypeInfo().Assembly);
-
-            //To get documents related to InterviewProcess
-            services.AddScoped(typeof(IRequest), typeof(GetInterviewProcessDetailQuery));
-            services.AddMediatR(typeof(GetInterviewProcessDetailQuery).GetTypeInfo().Assembly);
-
 
             //To update collections and update new values
             services.AddScoped(typeof(IRequest), typeof(UpdateCandidateCommand));
