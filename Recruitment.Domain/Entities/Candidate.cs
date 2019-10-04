@@ -6,8 +6,10 @@ namespace Recruitment.Domain.Entities
 {
     public class Candidate
     {
-        [BsonRepresentation(BsonType.ObjectId)] 
+        [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
+        [BsonElement("UserName")]
+        public string UserName { get; set; }
         [BsonElement("Name")]
         public string Name { get; set; }
         [BsonElement("DOB")]

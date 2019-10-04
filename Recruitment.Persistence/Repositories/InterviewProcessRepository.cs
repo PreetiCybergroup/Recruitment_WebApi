@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using Recruitment.Application.Interfaces;
 using Recruitment.Domain.Entities;
@@ -26,8 +27,8 @@ namespace Recruitment.Persistence.Repositories
             _context = context;
             recruitment = _context.MongoClient.GetDatabase(Environment.GetEnvironmentVariable("DatabaseName") ?? configuration.GetSection("MongoSettings").GetSection("RecruitmentDatabaseName").Value);
             DbSet = recruitment.GetCollection<InterviewProcess>("interviewprocess");
-            resume = _context.MongoClient.GetDatabase(Environment.GetEnvironmentVariable("DatabaseName") ?? configuration.GetSection("MongoSettings").GetSection("RecruitmentDatabaseName").Value);
-            candidateDbSet = resume.GetCollection<Candidate>("candidate");
+            resume = _context.MongoClient.GetDatabase(Environment.GetEnvironmentVariable("DatabaseName") ?? configuration.GetSection("MongoSettings").GetSection("ResumeDatabaseName").Value);
+            candidateDbSet = resume.GetCollection<Candidate>("Candidate");
             // recruitDbset = database.GetCollection<InterviewRound>("interviewround");
         }
 
@@ -55,21 +56,55 @@ namespace Recruitment.Persistence.Repositories
 
         public  async Task<InterviewProcess> GetById(string Id)
         {
-            FilterDefinitionBuilder<InterviewProcess> tcBuilder = Builders<InterviewProcess>.Filter;
-           
-            //Fetch Interview Process on the basis of candidate id or application status
-            FilterDefinition<InterviewProcess> tcFilter = (tcBuilder.Eq(ip=>ip.CandidateId, Id) | tcBuilder.Eq(ip=>ip.FeedbackStatus, Id));
+            var tcFilter = Builders<InterviewProcess>.Filter.Eq(_ip => _ip.CandidateUserName, Id);
             var data = await DbSet.FindAsync(tcFilter);
+            InterviewProcess interviewProcess = new InterviewProcess();
             
+            foreach (var _data in data.ToList())
+            {
+                var filterId = Builders<Candidate>.Filter.Eq(_ip => _ip.UserName, _data.CandidateUserName);
+                var candidatedetails = await candidateDbSet.FindAsync(filterId);
+                if(candidatedetails != null)
+                { 
+                  var candidateName = candidatedetails.FirstOrDefault().Name;
+                  _data.candidateName = candidateName;
+                 }
+                interviewProcess.candidateName = _data.candidateName;
+                interviewProcess.FeedbackStatus = _data.FeedbackStatus;
+                interviewProcess.Id = _data.Id;
+                interviewProcess.StartDate = _data.StartDate;
+                interviewProcess.EndDate = _data.EndDate;
+            }
             
-            return data.FirstOrDefault();
+
+            return interviewProcess;
         }
 
         public  async Task<IEnumerable<InterviewProcess>> GetAll()
         {
-            //todo: remove it from here and place it at relevant place 
+            
             var all = await DbSet.FindAsync(Builders<InterviewProcess>.Filter.Empty);
-            return all.ToList();
+
+            List<InterviewProcess> listofinterviewProcess = new List<InterviewProcess>();
+            InterviewProcess interviewProcess = new InterviewProcess();
+            foreach (var _data in all.ToList())
+            {
+                var filterId = Builders<Candidate>.Filter.Eq(_candidate => _candidate.UserName, _data.CandidateUserName);
+                var candidatedetails = await candidateDbSet.FindAsync(filterId);
+                if (candidatedetails != null)
+                {
+                    var candidateName = candidatedetails.FirstOrDefault().Name;
+                    _data.candidateName = candidateName;
+                }
+                interviewProcess.CandidateUserName = _data.CandidateUserName;
+                interviewProcess.candidateName = _data.candidateName;
+                interviewProcess.FeedbackStatus = _data.FeedbackStatus;
+                interviewProcess.Id = _data.Id;
+                interviewProcess.StartDate = _data.StartDate;
+                interviewProcess.EndDate = _data.EndDate;
+                listofinterviewProcess.Add(interviewProcess);
+            }
+                return listofinterviewProcess;
         }
 
         public async Task<bool> Update(InterviewProcess obj)
