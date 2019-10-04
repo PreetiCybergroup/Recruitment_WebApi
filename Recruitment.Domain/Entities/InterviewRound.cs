@@ -17,8 +17,8 @@ namespace Recruitment.Domain.Entities
         [BsonElement("InterviewProcessId")]
         public string InterviewProcessId { get; set; }
 
-        [BsonElement("Interviewer")]
-        public string Interviewer { get; set; }
+        [BsonElement("InterviewerId")]
+        public string InterviewerId { get; set; }
 
         [BsonElement("FeedbackId")]
         public string FeedbackId { get; set; }

@@ -18,12 +18,7 @@ namespace Recruitment.Application.Candidates.Queries
 
         public async Task<CandidateDetailModel> Handle(GetCandidateDetailQuery request, CancellationToken cancellationToken)
         {
-            Candidate candidate = new Candidate();
-            var candidateEntity =  await _context.DbSet.FindAsync<Candidate>(Builders<Candidate>.Filter.Eq(x => x.Id, request.Id)); 
-            if (candidateEntity != null)
-            {
-              candidate =  candidateEntity.FirstOrDefault();
-            }
+           var candidate = await  _context.GetById(request.Id);
            return CandidateDetailModel.Create(candidate);
         }
     }

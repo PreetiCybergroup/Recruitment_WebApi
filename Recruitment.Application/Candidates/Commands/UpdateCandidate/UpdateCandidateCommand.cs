@@ -44,7 +44,7 @@ namespace Recruitment.Application.Candidates.Commands.UpdateCandidate
                 candidateinfo.Mobile = request.Mobile;
                 candidateinfo.ResumePath = request.ResumeLink;
                 
-                _context.Update(candidateinfo);
+                await _context.Update(candidateinfo);
                 return Unit.Value;
 
                 

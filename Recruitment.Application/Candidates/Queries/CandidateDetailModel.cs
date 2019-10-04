@@ -14,6 +14,9 @@ namespace Recruitment.Application.Candidates.Queries
         public string Mobile { get; set; }
         public string Email { get; set; }
         public string ResumePath { get; set; }
+        public string TechnicalSkills { get; set; }
+        public string Experience { get; set; }
+        public string Keyword { get; set; }
        
         public static Expression<Func<Candidate, CandidateDetailModel>> Projection
         {
@@ -21,12 +24,14 @@ namespace Recruitment.Application.Candidates.Queries
             {
                 return candidateModel => new CandidateDetailModel
                 {
-                    //Id = candidateModel.Id,
                     Name = candidateModel.Name,
                     DateOfBirth = candidateModel.DateOfBirth,
                     Email = candidateModel.Email,
                     Mobile = candidateModel.Mobile,
-                    ResumePath = candidateModel.ResumePath
+                    ResumePath = candidateModel.ResumePath,
+                    TechnicalSkills = candidateModel.TechnicalSkills,
+                    Experience = candidateModel.Experience,
+                    Keyword = candidateModel.Keyword
                 };
             }
         }

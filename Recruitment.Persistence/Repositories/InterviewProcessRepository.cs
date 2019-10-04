@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using MongoDB.Driver;
-using MongoDB.Driver.Builders;
 using Recruitment.Application.Interfaces;
 using Recruitment.Domain.Entities;
 
@@ -14,28 +14,37 @@ namespace Recruitment.Persistence.Repositories
         
         protected readonly IDbContext _context;
 
-        public IMongoCollection<InterviewProcess> DbSet { get; set;} //=> throw new NotImplementedException();
+        public IMongoCollection<InterviewProcess> DbSet { get; set;} 
+        public IMongoCollection<Candidate> candidateDbSet { get; set; }
+        public IMongoDatabase recruitment { get; }
+        public IMongoDatabase resume { get; }
 
-        public IMongoCollection<InterviewRound> recruitDbset { get; }
-       
-       public InterviewProcessRepository(IDbContext context, IConfiguration configuration) 
+        //public IMongoCollection<InterviewRound> recruitDbset { get; }
+
+        public InterviewProcessRepository(IDbContext context, IConfiguration configuration) 
         {
             _context = context;
-            var database = _context.MongoClient.GetDatabase(Environment.GetEnvironmentVariable("DatabaseName") ?? configuration.GetSection("MongoSettings").GetSection("RecruitmentDatabaseName").Value);
-            DbSet = database.GetCollection<InterviewProcess>("interviewprocess");
-            recruitDbset = database.GetCollection<InterviewRound>("interviewround");
+            recruitment = _context.MongoClient.GetDatabase(Environment.GetEnvironmentVariable("DatabaseName") ?? configuration.GetSection("MongoSettings").GetSection("RecruitmentDatabaseName").Value);
+            DbSet = recruitment.GetCollection<InterviewProcess>("interviewprocess");
+            resume = _context.MongoClient.GetDatabase(Environment.GetEnvironmentVariable("DatabaseName") ?? configuration.GetSection("MongoSettings").GetSection("RecruitmentDatabaseName").Value);
+            candidateDbSet = resume.GetCollection<Candidate>("candidate");
+            // recruitDbset = database.GetCollection<InterviewRound>("interviewround");
         }
 
-         
+
 
         public async void Add(InterviewProcess obj)
         {
-         try
+         if(obj != null)
             {
-              await DbSet.InsertOneAsync(obj);
+                await DbSet.InsertOneAsync(obj);
             }
-            catch(Exception ex)
-            { }
+              
+        else
+            {
+                throw new Exception("Add details to start interview process of a candidate");
+            }
+            
         }
 
         public void Dispose()
@@ -46,12 +55,19 @@ namespace Recruitment.Persistence.Repositories
 
         public  async Task<InterviewProcess> GetById(string Id)
         {
-            var data = await DbSet.FindAsync(Builders<InterviewProcess>.Filter.Eq(_ip => _ip.Id, Id));
+            FilterDefinitionBuilder<InterviewProcess> tcBuilder = Builders<InterviewProcess>.Filter;
+           
+            //Fetch Interview Process on the basis of candidate id or application status
+            FilterDefinition<InterviewProcess> tcFilter = (tcBuilder.Eq(ip=>ip.CandidateId, Id) | tcBuilder.Eq(ip=>ip.FeedbackStatus, Id));
+            var data = await DbSet.FindAsync(tcFilter);
+            
+            
             return data.FirstOrDefault();
         }
 
         public  async Task<IEnumerable<InterviewProcess>> GetAll()
         {
+            //todo: remove it from here and place it at relevant place 
             var all = await DbSet.FindAsync(Builders<InterviewProcess>.Filter.Empty);
             return all.ToList();
         }
@@ -79,21 +95,21 @@ namespace Recruitment.Persistence.Repositories
 
         public async void Remove(string Id)
         {
-           var filterId = Builders<InterviewProcess>.Filter.Eq(i => i.Id, Id);
+           //var filterId = Builders<InterviewProcess>.Filter.Eq(i => i.Id, Id);
             
-            if (filterId != null)
-            {
-                var interviewround = Builders<InterviewRound>.Filter.Eq(i => i.InterviewProcessId, Id);
+           // if (filterId != null)
+           // {
+           //     var interviewround = Builders<InterviewRound>.Filter.Eq(i => i.InterviewProcessId, Id);
 
                 
-                if (interviewround != null)
-                {
-                    await recruitDbset.DeleteManyAsync(interviewround);
+           //     if (interviewround != null)
+           //     {
+           //         await recruitDbset.DeleteManyAsync(interviewround);
                     
-                }
-                await DbSet.DeleteOneAsync(filterId);
+           //     }
+           //     await DbSet.DeleteOneAsync(filterId);
                 
-            }
+           // }
 
         }
 

@@ -29,7 +29,5 @@ namespace Recruitment.Domain.Entities
         [BsonElement("Date")]
         public string Date { get; set; }
 
-
-
     }
 }

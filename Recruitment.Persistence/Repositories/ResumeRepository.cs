@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using MongoDB.Driver;
 using System.Threading;
 using Microsoft.Extensions.Configuration;
+using MongoDB.Bson;
 
 namespace Recruitment.Persistence.Repositories
 {
@@ -25,25 +26,24 @@ namespace Recruitment.Persistence.Repositories
         public ResumeRepository(IDbContext context, IConfiguration configuration) 
         {
             _context = context;
+            var database = _context.MongoClient.GetDatabase(Environment.GetEnvironmentVariable("DatabaseName") ?? configuration.GetSection("MongoSettings").GetSection("ResumeDatabaseName").Value);
+
+            DbSet = database.GetCollection<Candidate>("Candidate");
             ftpPath = configuration.GetSection("FtpServerPath").GetSection("ServerPath").Value;
             ftpUserName = configuration.GetSection("FtpServerPath").GetSection("UserName").Value;
             ftpPassword = configuration.GetSection("FtpServerPath").GetSection("Password").Value;
-
-            var database = _context.MongoClient.GetDatabase(Environment.GetEnvironmentVariable("DatabaseName") ?? configuration.GetSection("MongoSettings").GetSection("ResumeDatabaseName").Value);
-            DbSet = database.GetCollection<Candidate>("candidate");
-
-
         }
 
         public async void Add(Candidate obj)
         {
-            await DbSet.InsertOneAsync(obj);
+            await DbSet.InsertOneAsync(obj); 
         }
 
-        public async Task<Candidate> GetById(string Id)
+        public async Task<Candidate> GetById(string name)
         {
-            var data = await DbSet.FindAsync(Builders<Candidate>.Filter.Eq(_ip => _ip.Id, Id));
-            return data.SingleOrDefault();
+            var filterId = Builders<Candidate>.Filter.Eq(_ip => _ip.Name , name);
+            var data = await DbSet.FindAsync(filterId);
+            return data.FirstOrDefault();
         }
 
         public async Task<IEnumerable<Candidate>> GetAll()

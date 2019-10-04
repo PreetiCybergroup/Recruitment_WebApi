@@ -28,7 +28,7 @@ namespace Recruitment.Application.Candidates.Queries
             
             return new CandidatesListViewModel
             {
-                candidates =  _mapper.Map<IList<Candidate>>(candidates)
+                candidates =  _mapper.Map<IEnumerable<Candidate>>(candidates)
             };
         }
     }
