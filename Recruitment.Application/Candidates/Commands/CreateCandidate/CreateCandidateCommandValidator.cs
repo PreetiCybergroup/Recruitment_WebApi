@@ -6,6 +6,7 @@ namespace Recruitment.Application.Candidates.Commands.CreateCandidate
     {
         public CreateCandidateCommandValidator()
         {
+            //RuleFor(x => x.UserName).MaximumLength(50).NotEmpty();
             RuleFor(x => x.Name).MaximumLength(60).NotEmpty();
             RuleFor(x => x.Mobile).MaximumLength(10).NotEmpty();
             RuleFor(x => x.Email).EmailAddress();

@@ -11,7 +11,7 @@ namespace Recruitment.Domain.Entities
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
 
-        [BsonElement("InterviewRoundId")]
+        [BsonElement("InterviewRoundTypeId")]
         public string InterviewRoundTypeId { get; set; }
 
         [BsonElement("InterviewProcessId")]
@@ -25,6 +25,8 @@ namespace Recruitment.Domain.Entities
 
         [BsonElement("Date")]
         public DateTime Date { get; set; }
+        [BsonIgnore]
+        public string InterviewerName { get; set; }
 
     }
 }

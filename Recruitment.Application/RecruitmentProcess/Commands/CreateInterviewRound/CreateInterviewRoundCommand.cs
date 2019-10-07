@@ -11,7 +11,7 @@ namespace Recruitment.Application.RecruitmentProcess.Commands.CreateInterviewRou
     {
         public string InterviewRoundTypeId { get; set; }
         public string InterviewProcessId { get; set; }
-        public string Interviewer { get; set; }
+        public string InterviewerId { get; set; }
         public string FeedbackId { get; set; }
         public DateTime Date { get; set; }
         public class Handler : IRequestHandler<CreateInterviewRoundCommand, Unit>
@@ -31,7 +31,7 @@ namespace Recruitment.Application.RecruitmentProcess.Commands.CreateInterviewRou
                 {
                     InterviewRoundTypeId = request.InterviewRoundTypeId,
                     InterviewProcessId = request.InterviewProcessId,
-                    Interviewer = request.Interviewer,
+                    InterviewerId = request.InterviewerId,
                     FeedbackId = request.FeedbackId,
                     Date = System.DateTime.Now
                 };

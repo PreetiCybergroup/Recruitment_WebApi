@@ -9,7 +9,7 @@ namespace Recruitment.Application.Candidates.Commands.CreateCandidate
 {
     public class CreateCandidateCommand : IRequest
     {
-        //public string Id { get; set; }
+       // public string UserName { get; set; }
         public string Name { get; set; }
         public string DateOfBirth { get; set; }
         public string Mobile { get; set; }
@@ -18,6 +18,8 @@ namespace Recruitment.Application.Candidates.Commands.CreateCandidate
         public string FileName { get; set; }
         //public string ResumeLink { get; set; }
         public string Keyword { get; set; }
+        public string TechnicalSkills { get; set; }
+        public string Experience { get; set; }
 
         public class Handler : IRequestHandler<CreateCandidateCommand, Unit>
         {
@@ -33,17 +35,19 @@ namespace Recruitment.Application.Candidates.Commands.CreateCandidate
             public async Task<Unit> Handle(CreateCandidateCommand request, CancellationToken cancellationToken)
             {
                 // Resume Code
-                var ResumeLink = UploadResume.uploadResumeDoc(_context.ftpPath, request.FileName, request.Resume, _context.ftpUserName, _context.ftpPassword);
-                
+                //var ResumeLink = UploadResume.uploadResumeDoc(_context.ftpPath, request.FileName, request.Resume, _context.ftpUserName, _context.ftpPassword);
+                var ResumeLink = UploadResume.uploadResumeDoc(request.FileName, request.Resume);
                 var entity = new Candidate
                 {
-                    //Id =          request.Id,
+                    UserName = request.Name,
                     Name =        request.Name,
                     DateOfBirth = request.DateOfBirth,
                     Email =       request.Email,
                     Mobile =      request.Mobile,
-                    ResumePath =  request.FileName,
-                    Keyword = request.Keyword
+                    ResumePath =  ResumeLink,
+                    Keyword = request.Keyword,
+                    TechnicalSkills = request.TechnicalSkills,
+                    Experience = request.Experience
                 };
                   _context.Add(entity);
                 

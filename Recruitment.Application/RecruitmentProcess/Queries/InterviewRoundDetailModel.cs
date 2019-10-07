@@ -12,7 +12,7 @@ namespace Recruitment.Application.RecruitmentProcess.Queries
 
         public string InterviewProcessId { get; set; }
 
-        public string Interviewer { get; set; }
+        public string InterviewerId { get; set; }
 
         public string FeedbackId { get; set; }
         public DateTime Date { get; set; }
@@ -25,7 +25,7 @@ namespace Recruitment.Application.RecruitmentProcess.Queries
                 {
                     InterviewRoundTypeId = interviewRoundModel.InterviewRoundTypeId,
                     InterviewProcessId = interviewRoundModel.InterviewProcessId,
-                    Interviewer = interviewRoundModel.Interviewer,
+                    InterviewerId = interviewRoundModel.InterviewerId,
                     FeedbackId =interviewRoundModel.FeedbackId,
                     Date = interviewRoundModel.Date
                  };

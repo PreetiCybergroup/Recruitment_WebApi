@@ -4,13 +4,14 @@ using Recruitment.Domain.Entities;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using MongoDB.Bson;
 
 namespace Recruitment.Application.RecruitmentProcess.Commands.CreateInterviewProcess
 {
     public class CreateInterviewProcessCommand : IRequest
     {
         public string CandidateId { get; set; }
-        public string FeedbackStatus { get; set; }
+        //public string FeedbackStatus { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public class Handler : IRequestHandler<CreateInterviewProcessCommand, Unit>
@@ -29,9 +30,9 @@ namespace Recruitment.Application.RecruitmentProcess.Commands.CreateInterviewPro
                 var entity = new InterviewProcess
                 {
                     CandidateId = request.CandidateId,
-                    FeedbackStatus = request.FeedbackStatus,
-                    StartDate = System.DateTime.Now,
-                    EndDate = System.DateTime.Now
+                    FeedbackStatus = "New",
+                    StartDate = DateTime.Now,
+                    EndDate = DateTime.Now
                 };
 
                  _context.Add(entity);

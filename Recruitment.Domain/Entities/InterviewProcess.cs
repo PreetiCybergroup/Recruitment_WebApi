@@ -3,6 +3,7 @@ using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Runtime.Serialization;
 
 namespace Recruitment.Domain.Entities
 {
@@ -12,6 +13,7 @@ namespace Recruitment.Domain.Entities
         public string Id { get; set; }
 
         [BsonElement("CandidateId")]
+        [BsonRepresentation(BsonType.ObjectId)]
         public string CandidateId { get; set; }
 
         [BsonElement("FeedbackStatus")]
@@ -22,6 +24,8 @@ namespace Recruitment.Domain.Entities
 
         [BsonElement("EndDate")]
         public DateTime EndDate { get; set; }
+        [BsonIgnore]
+        public string candidateName { get; set; }
 
 
 

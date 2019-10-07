@@ -23,6 +23,7 @@ namespace Recruitment.Application.RecruitmentProcess.Queries
             {
                 var interviewprocess = new InterviewProcess();
                 interviewprocess = await _context.GetById(request.Id);
+                
 
                 return InterviewProcessDetailModel.Create(interviewprocess);
 

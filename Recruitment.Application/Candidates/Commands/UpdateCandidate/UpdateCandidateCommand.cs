@@ -16,7 +16,7 @@ namespace Recruitment.Application.Candidates.Commands.UpdateCandidate
 {
     public class UpdateCandidateCommand : IRequest
     {
-        public string Id { get; set; }
+        //public string Id { get; set; }
         public string Name { get; set; }
         public string DateOfBirth { get; set; }
         public string Mobile { get; set; }
@@ -38,7 +38,7 @@ namespace Recruitment.Application.Candidates.Commands.UpdateCandidate
             {
 
                 var candidateinfo = new Candidate();
-                candidateinfo.Id = request.Id;
+                //candidateinfo.Id = request.Id;
                 candidateinfo.DateOfBirth = request.DateOfBirth;
                 candidateinfo.Email = request.Email;
                 candidateinfo.Mobile = request.Mobile;

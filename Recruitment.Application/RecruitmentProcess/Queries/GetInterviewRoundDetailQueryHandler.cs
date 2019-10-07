@@ -28,7 +28,4 @@ namespace Recruitment.Application.RecruitmentProcess.Queries
             return InterviewRoundDetailModel.Create(interviewround);
         }
     }
-
-
-
 }

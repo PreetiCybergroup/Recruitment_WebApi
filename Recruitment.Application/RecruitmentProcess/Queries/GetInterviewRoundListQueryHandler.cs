@@ -11,33 +11,41 @@ namespace Recruitment.Application.RecruitmentProcess.Queries
     public class GetInterviewRoundListDetailQuery : IRequest<InterviewRoundListDetailModel>
     {
         public IEnumerable<InterviewRound> interviewRoundList { get; set; }
+        public string interviewProcessId { get; set; }
     }
 
-        public class GetInterviewRoundListDetailQueryHandler : IRequestHandler<GetInterviewRoundListDetailQuery, InterviewRoundListDetailModel>
+    public class GetInterviewRoundListDetailQueryHandler : IRequestHandler<GetInterviewRoundListDetailQuery, InterviewRoundListDetailModel>
+    {
+        private readonly IInterviewRoundRepository _context;
+        private readonly IMapper _mapper;
+
+        public GetInterviewRoundListDetailQueryHandler(IInterviewRoundRepository context, IMapper mapper)
         {
-            private readonly IInterviewRoundRepository _context;
-            private readonly IMapper _mapper;
+            _context = context;
+            _mapper = mapper;
+        }
 
-            public GetInterviewRoundListDetailQueryHandler(IInterviewRoundRepository context, IMapper mapper)
+        public async Task<InterviewRoundListDetailModel> Handle(GetInterviewRoundListDetailQuery request, CancellationToken cancellationtoken)
+        {
+            IEnumerable<InterviewRound> listOfInterviewRound;
+            if (!string.IsNullOrWhiteSpace(request.interviewProcessId))
             {
-                _context = context;
-                _mapper = mapper;
+                listOfInterviewRound = await _context.GetAll(request.interviewProcessId);
             }
-
-            public async Task<InterviewRoundListDetailModel> Handle(GetInterviewRoundListDetailQuery request, CancellationToken cancellationtoken)
+            else
             {
-                IEnumerable<InterviewRound> listOfInterviewRound;
                 listOfInterviewRound = await _context.GetAll();
-
-                return new InterviewRoundListDetailModel
-                {
-                    interviewRoundList = _mapper.Map<IEnumerable<InterviewRound>>(listOfInterviewRound)
-                };
-
-
             }
+
+            return new InterviewRoundListDetailModel
+            {
+                interviewRoundList = _mapper.Map<IEnumerable<InterviewRound>>(listOfInterviewRound)
+            };
+
 
         }
+
     }
+}
 
 

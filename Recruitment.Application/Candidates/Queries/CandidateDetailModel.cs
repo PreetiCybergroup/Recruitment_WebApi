@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
+using Recruitment.Application.Candidates.Common;
 
 namespace Recruitment.Application.Candidates.Queries
 {
@@ -17,6 +18,8 @@ namespace Recruitment.Application.Candidates.Queries
         public string TechnicalSkills { get; set; }
         public string Experience { get; set; }
         public string Keyword { get; set; }
+
+        public string Resume_base64 { get; set; }
        
         public static Expression<Func<Candidate, CandidateDetailModel>> Projection
         {
@@ -31,7 +34,8 @@ namespace Recruitment.Application.Candidates.Queries
                     ResumePath = candidateModel.ResumePath,
                     TechnicalSkills = candidateModel.TechnicalSkills,
                     Experience = candidateModel.Experience,
-                    Keyword = candidateModel.Keyword
+                    Keyword = candidateModel.Keyword,
+                    Resume_base64 = UploadResume.downloadResumeDoc(candidateModel.ResumePath)
                 };
             }
         }
