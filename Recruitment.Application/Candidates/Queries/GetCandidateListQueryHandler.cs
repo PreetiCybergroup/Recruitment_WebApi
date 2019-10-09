@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using MongoDB.Driver;
+using Recruitment.Application.Candidates.Common;
 using Recruitment.Application.Interfaces;
 using Recruitment.Domain.Entities;
 using System;
@@ -25,6 +26,10 @@ namespace Recruitment.Application.Candidates.Queries
         public async Task<CandidatesListViewModel> Handle(GetAllCandidateDetailQuery request, CancellationToken cancellationToken)
         {
             var candidates = await _context.GetAll();
+            foreach(var _candidates in candidates)
+            {
+                _candidates.Resume_base64 = UploadResume.downloadResumeDoc(_candidates.ResumePath);
+            }
             
             return new CandidatesListViewModel
             {

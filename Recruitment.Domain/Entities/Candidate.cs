@@ -26,6 +26,7 @@ namespace Recruitment.Domain.Entities
         public string Experience { get; set; }
         [BsonElement("Keyword")]
         public string Keyword { get; set; }
-
+        [BsonIgnore]
+        public string Resume_base64 { get; set; }
     }
 }
